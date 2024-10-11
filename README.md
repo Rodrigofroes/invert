@@ -32,7 +32,6 @@ Configure as variáveis de ambiente no `.env`:
 **Frontend**:
 ```
 HOST_API= // URL da API Backend
-STRIPE_PUBLIC_KEY= // Chave pública do Stripe para o frontend
 ```
 
 **Backend**:
