@@ -13,7 +13,7 @@ Esse projeto é uma aplicação para a gestão de matrículas de alunos, geraç�
 
 ## Tecnologias Utilizadas
 
-- **Frontend**: HTML, CSS, BOOSTSTRAP, JavaScript, Express.js
+- **Frontend**: HTML, CSS, Bootstrap, JavaScript, Express.js
 - **Backend**: JavaScript, Express.js, MySQL e Stripe para gerenciamento de pagamentos
 - **Autenticação**: JWT para autenticação de usuários
 
@@ -32,6 +32,7 @@ Configure as variáveis de ambiente no `.env`:
 **Frontend**:
 ```
 HOST_API= // URL da API Backend
+STRIPE_PUBLIC_KEY= // Chave pública do Stripe para o frontend
 ```
 
 **Backend**:
@@ -42,6 +43,8 @@ DB_USER= // Usuário do banco de dados
 DB_PASSWORD= // Senha do banco de dados
 STRIPE_SECRET_KEY= // Chave secreta do Stripe
 ```
+
+A chave pública do Stripe deve ser adicionada no arquivo JavaScript localizado em `client/js/curso/matricula.js`.
 
 ## Como Utilizar
 
