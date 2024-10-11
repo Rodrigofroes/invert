@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API - Matrículas",
+    "description": "Esta API permite a gestão de matrículas de alunos, geração automática de mensalidades, além da criação de RA (Registro Acadêmico) e senhas. Ela também fornece rotas públicas para listar cursos e criar novas matrículas, além de rotas privadas para autenticação e consulta de mensalidades.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/"
+    }
+  ],
+  "paths": {
+    "/curso/": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Lista de cusrsos",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/curso/{id}": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Lista de cusrsos",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/matricula/": {
+      "post": {
+        "tags": [
+          "Matrícula "
+        ],
+        "summary": "Cadastra uma Matrícula ",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/matriculaModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Autenticação de acesso",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ra": {
+                    "example": "any"
+                  },
+                  "senha": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mensalidade/": {
+      "get": {
+        "tags": [
+          "Mensalidade"
+        ],
+        "summary": "Consultar Mensalidade",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "matriculaModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 0
+          },
+          "nome": {
+            "type": "string",
+            "example": "Fulano"
+          },
+          "email": {
+            "type": "string",
+            "example": "Fulano@teste.com"
+          },
+          "cep": {
+            "type": "string",
+            "example": "19160000"
+          },
+          "endereco": {
+            "type": "string",
+            "example": "Rua teste"
+          },
+          "bairro": {
+            "type": "string",
+            "example": "Bairro teste"
+          },
+          "cidade": {
+            "type": "string",
+            "example": "Cidade teste"
+          },
+          "estado": {
+            "type": "string",
+            "example": "SP"
+          },
+          "curso": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "nome": {
+                "type": "string",
+                "example": "Análise e Desenvolvimento de Sistemas"
+              },
+              "valor": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<script src="/js/login/login.js"></script>
+<div class="mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Login</li>
+        </ol>
+    </nav>
+</div>
+<div class="container d-flex justify-content-center align-items-center vh-100 p-4 login-box">
+    <div class="card card-outline card-primary w-100" style="max-width: 400px;">
+        <div class="card-header text-center">
+            <a href="#" class="h1 text-success text-decoration-none"><b>Invert</b></a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Entrar para iniciar sua sessão</p>
+            <form novalidate>
+                <div class="input-group mb-3">
+                    <input id="inputRa" type="email" class="form-control" placeholder="RA" required>
+                    <div class="invalid-feedback">
+                        RA é obrigatório.
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input id="inputSenha" type="password" class="form-control" placeholder="Senha" required>
+                    <div class="invalid-feedback">
+                        Senha é obrigatória.
+                    </div>
+                </div>
+                <div class="msg">
+                    <p id="msg" class="text-center"></p>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button id="btnLogin" type="button" class="btn btn-success btn-block">Entrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

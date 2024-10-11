@@ -1,0 +1,53 @@
+<div style="height: 100%;" class="mt-4">
+    <h1 class="d-flex justify-content-center fw-bolder">Confira suas mensalidades</h1>
+    <hr>
+    <div>
+        <% if (msg) { %>
+            <div class="alert alert-<%= msgType %>" role="alert">
+                <%= msg %>
+            </div>
+            <% } %>
+    </div>
+    <div class="mt-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">
+                    Mensalidades
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Número da Matrícula</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (mensalidade.length> 0) { %>
+                                <% for (let i=0; i < mensalidade.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= mensalidade[i].matricula %>
+                                        </td>
+                                        <td>
+                                            <%= new Date(mensalidade[i].vencimento).toLocaleDateString() %>
+                                        </td>
+                                        <td>R$ <%= mensalidade[i].valor %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="3" class="text-center">Nenhuma mensalidade encontrada!</td>
+                                            </tr>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

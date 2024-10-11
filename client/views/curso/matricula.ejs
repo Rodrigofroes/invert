@@ -1,0 +1,157 @@
+<script src="/js/curso/matricula.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="/css/curso/matricula.css">
+<div class="mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Cursos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Matricular-se</li>
+        </ol>
+    </nav>
+</div>
+<div class="mt-4">
+    <h1 class="d-flex justify-content-center fw-bolder">Matricular-se</h1>
+    <hr>
+    <div>
+        <% if (msg) { %>
+            <div class="alert alert-<%= msgType %>" role="alert">
+                <%= msg %>
+            </div>
+            <% } %>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Dados do Curso</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Nome:</strong>
+                        <%= curso[0].nome %>
+                    </p>
+                    <p><strong>Valor:</strong> R$ <%= curso[0].valor %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lottie-loader">
+        <dotlottie-player id="lottie-loader"
+            src="https://lottie.host/d6db96d9-154c-48b7-b61b-74c7d4637ffa/VkI8qvikjv.json" background="transparent"
+            speed="1" direction="1" playMode="normal" loop autoplay></dotlottie-player>
+    </div>
+    <form id="payment-form" novalidate>
+        <div class="card mb-4">
+
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Dados do Aluno</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <input type="hidden" id="inputId" value="<%= curso[0].id %>">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="inputNome">Nome Completo:</label>
+                        <input class="form-control" type="text" id="inputNome" required>
+                        <div class="invalid-feedback">
+                            Nome completo é obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="inputEmail">E-mail:</label>
+                        <input class="form-control" type="email" id="inputEmail" required>
+                        <div class="invalid-feedback">
+                            E-mail é obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="inputCep">CEP:</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="text" id="inputCep" required>
+                            <button class="btn btn-outline-secondary" type="button" id="btnBuscarCep">Buscar</button>
+                            <div class="invalid-feedback">
+                                CEP é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label" for="inputEndereco">Endereço:</label>
+                        <input class="form-control" type="text" id="inputEndereco" required>
+                        <div class="invalid-feedback">
+                            Endereço é obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="inputBairro">Bairro:</label>
+                        <input class="form-control" type="text" id="inputBairro" required>
+                        <div class="invalid-feedback">
+                            Bairro é obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="inputCidade">Cidade:</label>
+                        <input class="form-control" type="text" id="inputCidade" required>
+                        <div class="invalid-feedback">
+                            Cidade é obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label" for="inputEstado">Estado:</label>
+                        <select class="form-control" name="estado" id="inputEstado" required>
+                            <option>Escolha</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Estado é obrigatório.
+                        </div>
+                    </div>
+                    <div class="invalid-feedback">
+                        Estado é obrigatório.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Pagamento da Matrícula</h4>
+            </div>
+            <div class="card-body">
+                <input type="hidden" id="clientSecret" value="<%= pagamento.client_secret %>">
+                <div class="mb-3">
+                    <label for="card-element" class="form-label">Dados do Cartão</label>
+                    <div id="card-element" class="form-control py-2"></div>
+                    <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+                </div>
+                <button id="pay-button" class="btn btn-success mt-3" type="button">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Pagar Agora
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
