@@ -66,4 +66,4 @@ A chave pública do Stripe deve ser adicionada no arquivo JavaScript localizado 
 
 ## Contribuições
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir um *pull request* ou *issue*.
+Contribuições são bem-vindas! Sinta-se à vontade para abrir um *pull request*.
